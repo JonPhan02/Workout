@@ -118,19 +118,4 @@ public class WorkoutWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    public void startChronometer(View v){
-        if (!running){
-            //chronometer.start();
-            running = true;
-        }
-    }
-
-    public void pauseChronometer(View v){
-        if (running){
-            //chronometer.stop();
-            running = false;
-        }
-    }
-
-
 }
