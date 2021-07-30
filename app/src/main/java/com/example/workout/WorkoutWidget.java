@@ -51,7 +51,7 @@ public class WorkoutWidget extends AppWidgetProvider {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.workout_widget);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName watchWidget = new ComponentName(context, WorkoutWidget.class);
-        Chronometer chronometer  = new Chronometer(context);
+        //Chronometer chronometer  = new Chronometer(context);
         if (add.equals(action)){
             Count.count++;
             temp = Count.count.toString();
