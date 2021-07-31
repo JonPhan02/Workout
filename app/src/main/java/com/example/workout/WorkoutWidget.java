@@ -24,15 +24,12 @@ class Count {
 
 public class WorkoutWidget extends AppWidgetProvider {
 
-    //public static Chronometer chronometer;
-    public long stopTime = 0;
-    public boolean running;
-    public static String add = "addButton";
-    public static String sub = "minusButton";
-    public static String clear = "clearButton";
-    public static String start = "startButton";
-    public static String stop = "stopButton";
-    public static String reset = "resetButton";
+    private static String add = "addButton";
+    private static String sub = "minusButton";
+    private static String clear = "clearButton";
+    private static String start = "startButton";
+    private static String stop = "stopButton";
+    private static String reset = "resetButton";
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
@@ -51,7 +48,6 @@ public class WorkoutWidget extends AppWidgetProvider {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.workout_widget);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName watchWidget = new ComponentName(context, WorkoutWidget.class);
-        //Chronometer chronometer  = new Chronometer(context);
         if (add.equals(action)){
             Count.count++;
             temp = Count.count.toString();
@@ -69,10 +65,6 @@ public class WorkoutWidget extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
         } else if (start.equals(action)){
             remoteViews.setChronometer(R.id.timer, SystemClock.elapsedRealtime(), null, true);
-            //stopTime = SystemClock.elapsedRealtime();
-            appWidgetManager.updateAppWidget(watchWidget, remoteViews);
-        } else if (stop.equals(action)){
-            remoteViews.setChronometer(R.id.timer, SystemClock.elapsedRealtime(), null, false);
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
         } else if (reset.equals(action)){
             remoteViews.setChronometer(R.id.timer, SystemClock.elapsedRealtime(), null, false);
@@ -91,18 +83,12 @@ public class WorkoutWidget extends AppWidgetProvider {
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
-           // chronometer = new Chronometer(context);
-            RemoteViews remoteViews;
-            ComponentName watchWidget;
-
-            remoteViews = new RemoteViews(context.getPackageName(), R.layout.workout_widget);
-            watchWidget = new ComponentName(context, WorkoutWidget.class);
-
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.workout_widget);
+            ComponentName watchWidget = new ComponentName(context, WorkoutWidget.class);
             remoteViews.setOnClickPendingIntent(R.id.addButton, getPendingSelfIntent(context, add));
             remoteViews.setOnClickPendingIntent(R.id.minusButton, getPendingSelfIntent(context, sub));
             remoteViews.setOnClickPendingIntent(R.id.clearButton, getPendingSelfIntent(context, clear));
             remoteViews.setOnClickPendingIntent(R.id.startButton, getPendingSelfIntent(context, start));
-            remoteViews.setOnClickPendingIntent(R.id.stopButton, getPendingSelfIntent(context, stop));
             remoteViews.setOnClickPendingIntent(R.id.resetButton, getPendingSelfIntent(context, reset));
             appWidgetManager.updateAppWidget(watchWidget, remoteViews);
         }
